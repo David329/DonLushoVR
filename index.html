@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <script src="https://storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
+
+   <script>
+      window.addEventListener('load', onVrViewLoad)
+
+      function onVrViewLoad() {
+         var vrView = new VRView.Player('#vrview', {
+            image: 'img/street1.jpg',
+            is_stereo: false,
+            width: '100%',
+            height: 350
+         });
+
+         vrView.on('ready', function() {
+            vrView.addHotspot('building', {
+            pitch: 0, // In degrees. Up is positive.
+            yaw: 20, // In degrees. To the right is positive.
+            radius: 0.05, // Radius of the circular target in meters.
+            distance: 1 // Distance of target from camera in meters.
+            });
+         });
+
+         vrView.on('click', function(event) {
+            console.log('click', event.id);
+
+            if (event.id == "building") {
+               document.getElementById("status").  innerHTML = "Clicked";
+            }
+         });
+      }
+   </script>
+</head>
+
+<body>
+   <div id="vrview"></div>
+   <div id="status">NO</div>
+</body>
+</html>
